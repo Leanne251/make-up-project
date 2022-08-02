@@ -1,0 +1,41 @@
+@import "../../styles.css";
+
+button {
+	background: none;
+	border: none;
+}
+
+.search-form-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 3px solid var(--border-color);
+	border-radius: 4px;
+	width: 60%;
+	padding: 30px;
+	margin: 30px;
+	gap: 15px;
+}
+
+.search-button {
+	padding: 10px;
+	background-color: var(--header-color);
+	border-radius: 20px;
+	width: 20%;
+}
+
+.list-input {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--form-background-color);
+	border: none;
+	padding: 10px;
+	margin: 5px;
+	border-radius: 4px;
+	width: 250px;
+}
+
+input:focus {
+	outline: none;
+}

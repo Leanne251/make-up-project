@@ -1,0 +1,28 @@
+@import "../../styles.css";
+
+.navbar {
+	height: 50px;
+	width: 100%;
+	background-color: var(--header);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.left-side-buttons {
+	list-style: none;
+	gap: 15px;
+}
+
+a {
+	font-family: var(--header-text);
+	color: var(--header-color);
+	font-size: 16px;
+	text-decoration: none;
+	padding: 10px;
+}
+
+button {
+	background: none;
+	border: none;
+}

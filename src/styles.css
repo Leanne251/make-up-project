@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Quicksand:wght@300&display=swap');
+
+:root {
+	--header: #2e4052;
+	--header-text: 'Anton', sans-serif;
+	--primary-text: 'Quicksand', sans-serif;
+	--header-color: #e27396;
+	--border-color: #00a9a5;
+	--item-background-color: rgba(210, 214, 239, 0.3);
+	--form-background-color: #f2efea;
+}
+
+/* .myFonts {
+	font-family: 'Anton', sans-serif;
+	font-family: 'Quicksand', sans-serif;
+} */

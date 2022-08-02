@@ -1,0 +1,24 @@
+<div class="search-form-container">
+    <button class="search-button">Search All Products</button>
+   <button (click)="selectFilters()"><span>&#8609;</span>filters</button>
+    <form *ngIf="filters" [formGroup]="searchProductsForm">
+        <!-- <mat-checkbox></mat-checkbox> -->
+        <div FormArrayName="brands" >
+           <input type="checkbox" ><label>
+                Brands
+            </label>
+            <div *ngIf="brandsChecked" >
+                <ng-container *ngFor="let brand of searchProductsForm.get('brands')['controls']; let i = index;">
+                    <input type="text" FormControlName="i" class="list-input">
+                </ng-container>
+                <button (click)="addNewBrand()" > + </button>
+            </div>
+           
+          
+        </div>
+       
+        
+
+    </form>
+
+</div>
