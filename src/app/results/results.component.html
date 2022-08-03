@@ -1,1 +1,13 @@
-<p>results works!</p>
+<div class="item-container">
+  <p>{{ item.name }}</p>
+  <p>{{ item.brand | titlecase }}</p>
+  <img
+    [src]="item.api_featured_image"
+    alt="{{ item.name }}"
+    [height]="200"
+    [width]="200"
+  />
+  <p>item.description, needs truncating</p>
+  <p>£{{ item.price }}0</p>
+  <button>Add to Basket</button>
+</div>

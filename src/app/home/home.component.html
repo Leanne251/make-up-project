@@ -1,3 +1,11 @@
 <app-header></app-header>
 <div class="space-for-pics">Space For Pics</div>
-<app-search-form></app-search-form>
+
+<app-search-form (allSearchResults)="collectData($event)"></app-search-form>
+<div class="results-container">
+  <app-results *ngFor="let item of items" [item]="item"></app-results>
+</div>
+
+<!--
+<ng-template #showForm></ng-template> -->
+<!-- *ngIf="allSearchResults.length > 1; showForm" -->
