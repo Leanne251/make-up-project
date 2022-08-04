@@ -1,4 +1,5 @@
 import { Component, Input, OnInit,  } from '@angular/core';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-results',
@@ -11,9 +12,14 @@ export class ResultsComponent implements OnInit {
   @Input() item:any
 
 
-  // constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit(): void {
+
+  // this.httpService.resultData.subscribe(
+  //   (data:any) => console.log("results", data)
+  // )
+
   }
 
 }

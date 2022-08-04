@@ -1,7 +1,11 @@
 <app-header></app-header>
 <div class="space-for-pics">Space For Pics</div>
-
-<app-search-form (allSearchResults)="collectData($event)"></app-search-form>
+<div class="search-form-container">
+  <app-search-all-products
+    (allSearchResults)="collectData($event)"
+  ></app-search-all-products>
+  <app-new-search-form></app-new-search-form>
+</div>
 <div class="results-container">
   <app-results *ngFor="let item of items" [item]="item"></app-results>
 </div>

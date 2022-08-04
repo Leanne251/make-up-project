@@ -1,0 +1,17 @@
+@import "../../styles.css";
+
+button {
+	background: none;
+	border: none;
+}
+
+
+
+.search-button {
+	padding: 10px;
+  margin: 10px;
+	background-color: var(--header-color);
+	border-radius: 20px;
+	width: 100%
+}
+

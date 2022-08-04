@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   allSearchResults: any;
   groupsOfTen = []
   items: any
-
+  filter
 
   // if no search results show form.
   // if search results show results.
@@ -22,8 +22,13 @@ export class HomeComponent implements OnInit {
 
   collectData(searchResults: any){
     this.allSearchResults = searchResults
+    console.log("results",this.allSearchResults )
     this.items = searchResults.slice(0,5)
     console.log(this.items)
+  }
+
+  getFilterStatus(filterStatus: boolean){
+  this.filter = filterStatus
   }
 
 }

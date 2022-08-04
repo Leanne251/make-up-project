@@ -1,0 +1,28 @@
+<button class="search-button" (click)="searchAllProducts()">
+  Search All Products
+</button>
+<button><span>&#8609;</span>filters</button>
+<!-- <form *ngIf="filters" [formGroup]="searchProductsForm"> -->
+<!-- <mat-checkbox></mat-checkbox> -->
+
+<!-- <input
+      type="checkbox"
+      formControlName="brandCheckbox"
+      (click)="isChecked()"
+    /><label> Brands </label>
+
+    <div *ngIf="brandsChecked">
+      <div formArrayName="brands">
+        <div *ngFor="let brand of getBrands.controls; let i = index">
+          <div [formGroupName]="i">
+            <input type="text" formControlName="brand" class="list-input" />
+            <button *ngIf="brandsFields > 0" (click)="removeOption(i)">
+              -
+            </button>
+          </div>
+        </div>
+        <button *ngIf="brandsFields < 2" (click)="addNewBrand()">+</button>
+      </div>
+    </div>
+    <button class="search-button" (click)="searchForm()">Search</button>
+  </form> -->
