@@ -1,4 +1,4 @@
-<div class="item-container">
+<div class="item-container" *ngIf="item">
   <p>{{ item.name }}</p>
   <p>{{ item.brand | titlecase }}</p>
   <img
@@ -10,4 +10,10 @@
   <p>item.description, needs truncating</p>
   <p>£{{ item.price }}0</p>
   <button>Add to Basket</button>
+</div>
+<div>{{ results[0].name }}</div>
+<div *ngIf="getResultsWithParams">
+  <div *ngFor="let results of getResultsWithParams">
+    <p>{{ getResultsWithParams.name }}</p>
+  </div>
 </div>

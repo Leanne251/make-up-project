@@ -16,20 +16,20 @@
   />
   <label> Product Type </label>
   <div *ngIf="productsChecked">
-    <input type="text" formControlName="productType" class="list-input" />
+    <input type="text" formControlName="product_type" class="list-input" />
   </div>
 
   <input
     type="checkbox"
-    formControlName="wordCheckbox"
-    (click)="isKeyWordChecked()"
+    formControlName="tagCheckbox"
+    (click)="isTagChecked()"
   />
   <label> Key Words</label>
   <div *ngIf="keyWordsChecked">
-    <div formArrayName="keyWords">
-      <div *ngFor="let word of getKeyWords.controls; let i = index">
+    <div formArrayName="product_tags">
+      <div *ngFor="let word of getTags.controls; let i = index">
         <div [formGroupName]="i">
-          <input type="text" formControlName="keyWord" class="list-input" />
+          <input type="text" formControlName="tag" class="list-input" />
           <button (click)="removeOption(i)">-</button>
         </div>
       </div>

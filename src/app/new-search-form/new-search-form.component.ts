@@ -9,8 +9,8 @@ import { HttpService } from '../services/http.service';
 })
 export class NewSearchFormComponent implements OnInit {
 
-get getKeyWords(){
-  return this.searchProductsForm.get('keyWords') as FormArray
+get getTags(){
+  return this.searchProductsForm.get('product_tags') as FormArray
 }
 
  @Input() filters: number;
@@ -28,19 +28,19 @@ get getKeyWords(){
       brandCheckbox: new FormControl(),
       brand: new FormControl(""),
       productCheckbox: new FormControl(),
-      productType: new FormControl(),
-      wordCheckbox: new FormControl(),
-			keyWords: new FormArray ([new FormGroup({
-            keyWord: new FormControl(""),
+      product_type: new FormControl(),
+      tagCheckbox: new FormControl(),
+			product_tags: new FormArray ([new FormGroup({
+            tag: new FormControl(""),
           })])
 
         })
 
   }
 
-  newWord(){
+  newTag(){
     return new FormGroup ({
-      keyWord: new FormControl("")
+      tag: new FormControl("")
     })
   }
 
@@ -48,7 +48,7 @@ get getKeyWords(){
 let length = this.getLength();
 if(length < 3){
 
- this.getKeyWords.push(this.newWord());
+ this.getTags.push(this.newTag());
   }
 }
 
@@ -67,19 +67,28 @@ if(length < 3){
 
  isBrandChecked(){
     this.brandsChecked = !this.searchProductsForm.value.brandCheckbox
-
+    if(!this.brandsChecked){
+        this.searchProductsForm.get('brand').reset()
+    }
  }
  isProductChecked(){
     this.productsChecked = !this.searchProductsForm.value.productCheckbox
+    if(!this.brandsChecked){
+      this.searchProductsForm.get('product_type').reset()
+  }
 
  }
- isKeyWordChecked(){
-    this.keyWordsChecked = !this.searchProductsForm.value.wordCheckbox
+
+ isTagChecked(){
+    this.keyWordsChecked = !this.searchProductsForm.value.tagCheckbox
+    if(!this.brandsChecked){
+      this.searchProductsForm.get('product_tags').reset()
+  }
 
  }
 
   getLength(){
-    let arrayControl = this.searchProductsForm.get('keyWords') as FormArray
+    let arrayControl = this.searchProductsForm.get('product_tags') as FormArray
 let length =  arrayControl.length
 
 return length;
@@ -88,6 +97,8 @@ return length;
 
   searchForm(){
     console.log("search Form",this.searchProductsForm.value)
+    this.httpService.fetchDataWithParams(this.searchProductsForm.value)
+
     // this.httpService.getFormInfo(this.searchProductsForm.value.brands)
     // this.httpService.searchWithParameters(this.searchProductsForm.value.brands)
     // this.httpService.resultData.subscribe(
@@ -95,12 +106,13 @@ return length;
     // )
 
     // send the data from the form to the service
-    // the data is used to make a get request
-    // then this data is used on the results page.
+    // the data is added to a private variable, this triggers a getter and nudges a subject.
+    // then in the results page, we will subscribe to the subject & create a getter to get the data.
+
   }
 
   removeOption(i :number){
-   this.getKeyWords.removeAt(i)
+   this.getTags.removeAt(i)
 
 
   }
