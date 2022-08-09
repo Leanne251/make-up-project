@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import { HttpClientModule } from '@angular/common/http'
-
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,7 +11,9 @@ import { ResultsComponent } from './results/results.component';
 import { BasketComponent } from './basket/basket.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewSearchFormComponent } from './new-search-form/new-search-form.component';
 import { ParamsResultsComponent } from './params-results/params-results.component';
@@ -26,10 +27,19 @@ import { ParamsResultsComponent } from './params-results/params-results.componen
 		ResultsComponent,
 		BasketComponent,
 		ProfileComponent,
-  NewSearchFormComponent,
-  ParamsResultsComponent
+		NewSearchFormComponent,
+		ParamsResultsComponent
 	],
-	imports: [ BrowserModule,HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, MatCheckboxModule, MatProgressSpinnerModule],
+	imports: [
+		BrowserModule,
+		HttpClientModule,
+		AppRoutingModule,
+		FormsModule,
+		ReactiveFormsModule,
+		MatCheckboxModule,
+		MatProgressSpinnerModule,
+		MatAutocompleteModule
+	],
 	providers: [],
 	bootstrap: [ AppComponent ]
 })

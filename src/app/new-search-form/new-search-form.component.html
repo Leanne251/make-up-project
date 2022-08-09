@@ -1,14 +1,25 @@
 <form [formGroup]="searchProductsForm" *ngIf="filter" class="form-container">
   <div class="item-label">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+    
     <input
       type="checkbox"
       formControlName="brandCheckbox"
       (click)="isBrandChecked()"
+      
     />
     <label> Brands </label>
   </div>
   <div *ngIf="brandsChecked">
-    <input type="text" formControlName="brand" class="list-input" />
+    <input type="text" formControlName="brand" class="list-input" (keyup)="searchOnKeyUp($event)" list="SearchResults"/>
+    <datalist id="SearchResults">
+      <option *ngFor="let sr of brandResults" [value]="sr">{{sr}}</option>
+   </datalist>
+    
   </div>
   <div class="item-label">
     <input
@@ -34,7 +45,12 @@
     <div formArrayName="product_tags">
       <div *ngFor="let word of getTags.controls; let i = index">
         <div [formGroupName]="i" class="array-items">
-          <input type="text" formControlName="tag" class="list-input" />
+          <input type="text" formControlName="tag" class="list-input" (keyup)="searchOnKeyUp($event)" list="SearchResults" />
+          <datalist id="SearchResults">
+            <option *ngFor="let sr of tagResults" [value]="sr">{{sr}}</option>
+         </datalist>
+
+  
           <button *ngIf="i > 0" (click)="removeOption(i)">-</button>
         </div>
       </div>
