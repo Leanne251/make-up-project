@@ -1,7 +1,15 @@
-<button class="search-button" (click)="searchAllProducts()">
-  Search All Products
-</button>
-<button><span>&#8609;</span>filters</button>
+<p *ngIf="isLoading; else notLoading">...Is Loading</p>
+<ng-template #notLoading>
+  <div *ngIf="!filter; else noFilters" class="search-button-container">
+    <button class="search-button" (click)="searchAllProducts()">
+      Search All Products
+    </button>
+    <button (click)="showFilters()"><span>&#8609;</span>Apply Filters</button>
+  </div>
+  <ng-template #noFilters>
+    <button (click)="showFilters()"><span>&#8609;</span>Remove Filters</button>
+  </ng-template>
+</ng-template>
 <!-- <form *ngIf="filters" [formGroup]="searchProductsForm"> -->
 <!-- <mat-checkbox></mat-checkbox> -->
 

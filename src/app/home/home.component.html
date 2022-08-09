@@ -1,14 +1,24 @@
 <app-header></app-header>
 <div class="space-for-pics">Space For Pics</div>
-<div class="search-form-container">
-  <app-search-all-products
-    (allSearchResults)="collectData($event)"
-  ></app-search-all-products>
-  <app-new-search-form></app-new-search-form>
-</div>
-<div class="results-container">
+<main class="main-container">
+  <div class="search-form-container">
+    <app-search-all-products
+      (allSearchResults)="collectData($event)"
+      (productFilters)="showFilters($event)"
+    ></app-search-all-products>
+    <app-new-search-form
+      (clearItems)="clearItems()"
+      [filter]="filter"
+    ></app-new-search-form>
+  </div>
+  <!-- If items exists, loop over them and display the results -->
+
+  <!-- <div *ngIf="items; else paramsItems" class="results-container"> -->
   <app-results *ngFor="let item of items" [item]="item"></app-results>
-</div>
+  <!-- </div> -->
+
+  <app-params-results></app-params-results>
+</main>
 
 <!--
 <ng-template #showForm></ng-template> -->

@@ -1,41 +1,52 @@
-<form [formGroup]="searchProductsForm">
-  <input
-    type="checkbox"
-    formControlName="brandCheckbox"
-    (click)="isBrandChecked()"
-  />
-  <label> Brands </label>
+<form [formGroup]="searchProductsForm" *ngIf="filter" class="form-container">
+  <div class="item-label">
+    <input
+      type="checkbox"
+      formControlName="brandCheckbox"
+      (click)="isBrandChecked()"
+    />
+    <label> Brands </label>
+  </div>
   <div *ngIf="brandsChecked">
     <input type="text" formControlName="brand" class="list-input" />
   </div>
-
-  <input
-    type="checkbox"
-    formControlName="productCheckbox"
-    (click)="isProductChecked()"
-  />
-  <label> Product Type </label>
+  <div class="item-label">
+    <input
+      type="checkbox"
+      formControlName="productCheckbox"
+      (click)="isProductChecked()"
+    />
+    <label> Product Type </label>
+  </div>
   <div *ngIf="productsChecked">
     <input type="text" formControlName="product_type" class="list-input" />
   </div>
 
-  <input
-    type="checkbox"
-    formControlName="tagCheckbox"
-    (click)="isTagChecked()"
-  />
-  <label> Key Words</label>
+  <div class="item-label">
+    <input
+      type="checkbox"
+      formControlName="tagCheckbox"
+      (click)="isTagChecked()"
+    />
+    <label> Key Words</label>
+  </div>
   <div *ngIf="keyWordsChecked">
     <div formArrayName="product_tags">
       <div *ngFor="let word of getTags.controls; let i = index">
-        <div [formGroupName]="i">
+        <div [formGroupName]="i" class="array-items">
           <input type="text" formControlName="tag" class="list-input" />
-          <button (click)="removeOption(i)">-</button>
+          <button *ngIf="i > 0" (click)="removeOption(i)">-</button>
         </div>
       </div>
       <button (click)="addNewWord()">+</button>
     </div>
   </div>
 
-  <button class="search-button" (click)="searchForm()">Search</button>
+  <button
+    class="search-button"
+    [disabled]="!searchProductsForm.valid"
+    (click)="searchForm()"
+  >
+    Search
+  </button>
 </form>

@@ -10,30 +10,19 @@ import { HttpService } from '../services/http.service';
 export class ResultsComponent implements OnInit {
 
 
-  get getResultsWithParams(){
-    return this.httpService.immutableResultsWithParams
-  }
+
 
   @Input() item:any
   results: any
 
 
-  constructor(private httpService: HttpService,  private cd: ChangeDetectorRef) { }
+  constructor() { }
 
   ngOnInit(): void {
 
-    this.httpService.resultsWithParams$.subscribe(
-      ()=>{
-        this.cd.markForCheck();
 
-      }
-    )
 
-    console.log("get", this.getResultsWithParams)
 
-    this.results = this.getResultsWithParams
-
-    console.log("r", this.results)
 
   // this.httpService.resultData.subscribe(
   //   (data:any) => console.log("results", data)

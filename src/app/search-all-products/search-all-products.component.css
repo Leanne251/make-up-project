@@ -6,12 +6,18 @@ button {
 }
 
 
-
 .search-button {
 	padding: 10px;
   margin: 10px;
 	background-color: var(--header-color);
 	border-radius: 20px;
 	width: 100%
+}
+
+.search-button-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 

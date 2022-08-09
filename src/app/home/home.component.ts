@@ -9,8 +9,8 @@ export class HomeComponent implements OnInit {
 
   allSearchResults: any;
   groupsOfTen = []
-  items: any
-  filter
+  items = []
+  filter: boolean
 
   // if no search results show form.
   // if search results show results.
@@ -20,17 +20,29 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+// get the data from the searchAll comp
+// set items to the first 5 items in the array
+
   collectData(searchResults: any){
     this.allSearchResults = searchResults
     console.log("results",this.allSearchResults )
     this.items = searchResults.slice(0,5)
-    console.log(this.items)
+    console.log("items", this.items)
   }
 
   getFilterStatus(filterStatus: boolean){
   this.filter = filterStatus
   }
 
+  showFilters(filter: boolean){
+    this.filter = filter;
+
+  }
+
+  clearItems(){
+    console.log("1")
+    this.items = undefined
+  }
 }
 
 // with the data, take the first 10 items, to display on a page.

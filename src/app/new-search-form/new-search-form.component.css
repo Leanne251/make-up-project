@@ -1,3 +1,17 @@
+@import "../../styles.css";
+
+.form-container{
+  display:flex;
+  flex-direction: column;
+
+}
+
+.item-label{
+  display: flex;
+  gap: 5px;
+
+}
+
 .search-button {
 	padding: 10px;
   margin: 10px;
@@ -24,4 +38,10 @@ input:focus {
 button{
   background: none;
   border:none;
+}
+
+.array-items{
+  display:flex;
+
+
 }
