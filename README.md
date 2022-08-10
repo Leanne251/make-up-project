@@ -5,6 +5,8 @@ Things to do next:
 
 Add autocomplete to the words you are allowed to search for.
 
+- Refactor code so it's not as repetative, use objects?
+
 Add validators to the form, so displayed inputs must have entries.
 
 Make the items per page button work

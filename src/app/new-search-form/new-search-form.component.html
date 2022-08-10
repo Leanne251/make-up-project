@@ -2,42 +2,65 @@
   <div class="item-label">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let option of options" [value]="option">
-        {{option}}
+        {{ option }}
       </mat-option>
     </mat-autocomplete>
-    
+
     <input
       type="checkbox"
+      name="brandCheckbox"
       formControlName="brandCheckbox"
-      (click)="isBrandChecked()"
-      
+      (click)="isChecked('brandCheckbox')"
     />
+
     <label> Brands </label>
   </div>
   <div *ngIf="brandsChecked">
-    <input type="text" formControlName="brand" class="list-input" (keyup)="searchOnKeyUp($event)" list="SearchResults"/>
-    <datalist id="SearchResults">
-      <option *ngFor="let sr of brandResults" [value]="sr">{{sr}}</option>
-   </datalist>
-    
+    <input
+      type="text"
+      name="brand"
+      formControlName="brand"
+      class="list-input"
+      (keyup)="searchOnKeyUp($event, 'brand')"
+      list="brandResults"
+    />
+    <datalist id="brandResults">
+      <option *ngFor="let brand of brandResults" [value]="brand">
+        {{ brand }}
+      </option>
+    </datalist>
   </div>
   <div class="item-label">
     <input
       type="checkbox"
+      name="productCheckbox"
       formControlName="productCheckbox"
-      (click)="isProductChecked()"
+      (click)="isChecked('productCheckbox')"
     />
     <label> Product Type </label>
   </div>
   <div *ngIf="productsChecked">
-    <input type="text" formControlName="product_type" class="list-input" />
+    <input
+      type="text"
+      name="product_type"
+      formControlName="product_type"
+      (keyup)="searchOnKeyUp($event, 'product_type')"
+      list="productResults"
+      class="list-input"
+    />
+    <datalist id="productResults">
+      <option *ngFor="let type of productResults" [value]="type">
+        {{ type }}
+      </option>
+    </datalist>
   </div>
 
   <div class="item-label">
     <input
       type="checkbox"
       formControlName="tagCheckbox"
-      (click)="isTagChecked()"
+      name="tagCheckbox"
+      (click)="isChecked('tagCheckbox')"
     />
     <label> Key Words</label>
   </div>
@@ -45,12 +68,18 @@
     <div formArrayName="product_tags">
       <div *ngFor="let word of getTags.controls; let i = index">
         <div [formGroupName]="i" class="array-items">
-          <input type="text" formControlName="tag" class="list-input" (keyup)="searchOnKeyUp($event)" list="SearchResults" />
-          <datalist id="SearchResults">
-            <option *ngFor="let sr of tagResults" [value]="sr">{{sr}}</option>
-         </datalist>
+          <input
+            type="text"
+            name="tag"
+            formControlName="tag"
+            class="list-input"
+            (keyup)="searchOnKeyUp($event, 'tag')"
+            list="tagResults"
+          />
+          <datalist id="tagResults">
+            <option *ngFor="let sr of tagResults" [value]="sr">{{ sr }}</option>
+          </datalist>
 
-  
           <button *ngIf="i > 0" (click)="removeOption(i)">-</button>
         </div>
       </div>

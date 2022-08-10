@@ -23,16 +23,33 @@ export class NewSearchFormComponent implements OnInit {
 	searchProductsForm: FormGroup;
 	clearItems = new EventEmitter();
 
-	brandResults: any[] = [];
+
+predictiveSearch = {
+
+    newBrandSearchResults: [],
+    newProductSearchResults:[],
+    newTagSearchResults: []
+
+  }
+
+  brandResults: any[] = [];
+  brandSearchResults: any[] = []
+
+  productResults: any[] = []
+  productSearchResults: any[] = []
+
 	tagResults: any[] = [];
-	searchResults: any[] = [];
+  tagSearchResults: any[] = []
+
+
+
 
 	options = [ 'benefit', 'colourpop', 'Maybeline' ];
 
 	constructor(private httpService: HttpService, private searchTermsService: SearchTermsService) {}
 
 	ngOnInit(): void {
-		this.getBrandResults();
+		this.getSearchResults();
 		// this.getTagResults();
 
 		this.searchProductsForm = new FormGroup({
@@ -49,34 +66,76 @@ export class NewSearchFormComponent implements OnInit {
 		});
 	}
 
-	getBrandResults(): void {
+  // get the search results from the service
+	getSearchResults(): void {
 		this.searchTermsService.getBrands().subscribe((sr) => {
-			console.log('sr', sr);
-			Object.assign(this.searchResults, sr);
-			// same as this.searchResults = sr?
+			console.log('brands', sr);
+			Object.assign(this.brandResults, sr);
+			// same as this.brandResults = sr?
 		});
-	}
-	// getTagResults(): void {
-	// 	this.searchTermsService.getTags().subscribe((sr) => {
-	// 		console.log('sr', sr);
-	// 		Object.assign(this.searchResults, sr);
-	// 		// same as this.searchResults = sr?
-	// 	});
-	// }
+    this.searchTermsService.getProducts().subscribe((sr) => {
+			console.log('products', sr);
+			Object.assign(this.productResults, sr);
 
-	searchOnKeyUp(event) {
+		});
+		this.searchTermsService.getTags().subscribe((sr) => {
+			console.log('tag', sr);
+			Object.assign(this.tagResults, sr);
+
+		});
+
+	}
+
+
+	searchOnKeyUp(event: any, name: string) {
+		let input = event
+		console.log('event.target.value: ' + input);
+    console.log("name inserted", name)
+
+		if (input.length > 1) {
+      if(name ==='brand'){
+        console.log("1", name)
+        this.brandSearchResults = this.searchFromArray(this.brandResults, input);
+      }
+      if( name === 'product_type'){
+        console.log("2", name)
+        this.productSearchResults = this.searchFromArray(this.productResults, input);
+      }
+      if( name === 'tag'){
+        console.log("3", name)
+        this.tagSearchResults = this.searchFromArray(this.tagResults, input);
+      }
+		}
+	}
+	searchOnKeyUpBrands(event) {
 		let input = event.target.value;
 		console.log('event.target.value: ' + input);
-		console.log('this.searchResults: ' + this.searchResults);
+		console.log('this.brandResults: ' + this.brandResults);
 		if (input.length > 1) {
-			this.brandResults = this.searchFromArray(this.searchResults, input);
+			this.brandSearchResults = this.searchFromArray(this.brandResults, input);
+		}
+	}
+	searchOnKeyUpProducts(event) {
+		let input = event.target.value;
+		console.log('event.target.value: ' + input);
+		console.log('this.productResults: ' + this.productResults);
+		if (input.length > 1) {
+			this.productSearchResults = this.searchFromArray(this.productResults, input);
+		}
+	}
+	searchOnKeyUpTags(event) {
+		let input = event.target.value;
+		console.log('event.target.value: ' + input);
+		console.log('this.tagResults: ' + this.tagResults);
+		if (input.length > 1) {
+			this.tagSearchResults = this.searchFromArray(this.tagResults, input);
 		}
 	}
 
-	searchFromArray(arr, regex) {
+	searchFromArray(arr, input) {
 		let matches = [];
 		for (let i = 0; i < arr.length; i++) {
-			if (arr[i].match(regex)) {
+			if (arr[i].match(input)) {
 				matches.push(arr[i]);
 			}
 		}
@@ -97,37 +156,40 @@ export class NewSearchFormComponent implements OnInit {
 		}
 	}
 
-	isBrandChecked() {
-		this.brandsChecked = !this.searchProductsForm.value.brandCheckbox;
-		if (!this.brandsChecked) {
-			this.searchProductsForm.get('brand').reset();
-		}
-	}
-	isProductChecked() {
-		this.productsChecked = !this.searchProductsForm.value.productCheckbox;
-		if (!this.brandsChecked) {
-			this.searchProductsForm.get('product_type').reset();
-		}
-	}
+	isChecked(inputType: string) {
 
-	isTagChecked() {
-		this.keyWordsChecked = !this.searchProductsForm.value.tagCheckbox;
-		if (!this.brandsChecked) {
-			this.searchProductsForm.get('product_tags').reset();
-		}
+    if(inputType === 'brandCheckbox' ){
+      this.brandsChecked = !this.searchProductsForm.value.brandCheckbox;
+      if (!this.brandsChecked) {
+        this.searchProductsForm.get('brand').reset();
+      }
+    }
+
+    if(inputType === 'productCheckbox'){
+      this.productsChecked = !this.searchProductsForm.value.productCheckbox;
+      if (!this.productsChecked) {
+        this.searchProductsForm.get('product_type').reset();
+      }
+    }
+
+    if(inputType === 'tagCheckbox'){
+      this.keyWordsChecked = !this.searchProductsForm.value.tagCheckbox;
+      if (!this.keyWordsChecked) {
+        this.searchProductsForm.get('product_tags').reset();
+      }
+    }
+
 	}
 
 	getLength() {
 		let arrayControl = this.searchProductsForm.get('product_tags') as FormArray;
 		let length = arrayControl.length;
-
 		return length;
 	}
 
 	searchForm() {
 		console.log('search Form', this.searchProductsForm.value);
 		this.httpService.fetchDataWithParams(this.searchProductsForm.value);
-		// this.clearItems.emit()
 	}
 
 	removeOption(i: number) {
