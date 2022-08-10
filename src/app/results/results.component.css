@@ -1,5 +1,54 @@
 @import "../../styles.css";
 
+
+.page-num-container{
+  display: flex;
+  direction: row;
+  gap: 4px;
+  flex-wrap: wrap;
+
+}
+
+.page-numbers{
+  border: none;
+  border-radius: 10%;
+  background-color: var(--border-color);
+  color: var(--form-background-color);
+  cursor: pointer;
+  font-weight: 600;
+
+}
+
+.product-container{
+  padding: 20px;
+  max-width: 100vw;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+
+  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  Could have replaced media queries but didnt work*/
+
+}
+
+@media (min-width: 600px) {
+  .product-container { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .product-container { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1200px) {
+  .product-container { grid-template-columns: repeat(4, 1fr); }
+}
+@media (min-width: 1500px) {
+  .product-container { grid-template-columns: repeat(5, 1fr); }
+}
+
+.button-container{
+  display:flex;
+
+}
+
 .item-container{
   border: 5px solid var(--border-color);
   border-radius: 4px;
@@ -9,11 +58,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 400px;
-height: auto;
-
-
-
-
-
+  width: 250px;
+  height: 250px;
 }
