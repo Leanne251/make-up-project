@@ -24,14 +24,6 @@ export class NewSearchFormComponent implements OnInit {
 	clearItems = new EventEmitter();
 
 
-predictiveSearch = {
-
-    newBrandSearchResults: [],
-    newProductSearchResults:[],
-    newTagSearchResults: []
-
-  }
-
   brandResults: any[] = [];
   brandSearchResults: any[] = []
 
@@ -107,30 +99,8 @@ predictiveSearch = {
       }
 		}
 	}
-	searchOnKeyUpBrands(event) {
-		let input = event.target.value;
-		console.log('event.target.value: ' + input);
-		console.log('this.brandResults: ' + this.brandResults);
-		if (input.length > 1) {
-			this.brandSearchResults = this.searchFromArray(this.brandResults, input);
-		}
-	}
-	searchOnKeyUpProducts(event) {
-		let input = event.target.value;
-		console.log('event.target.value: ' + input);
-		console.log('this.productResults: ' + this.productResults);
-		if (input.length > 1) {
-			this.productSearchResults = this.searchFromArray(this.productResults, input);
-		}
-	}
-	searchOnKeyUpTags(event) {
-		let input = event.target.value;
-		console.log('event.target.value: ' + input);
-		console.log('this.tagResults: ' + this.tagResults);
-		if (input.length > 1) {
-			this.tagSearchResults = this.searchFromArray(this.tagResults, input);
-		}
-	}
+
+
 
 	searchFromArray(arr, input) {
 		let matches = [];
