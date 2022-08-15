@@ -1,0 +1,21 @@
+.basket-container {
+	display: flex;
+	gap: 10px;
+
+	align-items: center;
+}
+
+.item-titles {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid grey;
+	height: 100%;
+}
+
+/* Maybe grid for the basket?? */
+
+/* need to check items don't get added more than once
+item quantity can only be increased from the basket
+this quantity must be saved so when fetched it is correct */

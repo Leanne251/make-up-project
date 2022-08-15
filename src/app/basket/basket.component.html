@@ -1,1 +1,10 @@
-<p>basket works!</p>
+<app-header></app-header>
+<div *ngFor="let data of basketData" class="basket-container">
+    <img [src]="data.api_featured_image" height="100" width="100" class="border">
+    <div class="item-titles">
+        <p class="border">{{data.name}}</p>
+        <p class="border">{{data.brand}}</p>
+    </div>
+    
+    <p class="border">{{data.price}}</p>
+</div>

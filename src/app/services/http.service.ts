@@ -18,6 +18,7 @@ export class HttpService {
 
 	private results: any;
 	private length: any;
+
 	params: any;
 
 	results$ = new Subject();
@@ -73,11 +74,15 @@ export class HttpService {
 		});
 	}
 
-	addToBasket() {
-    console.log(1)
-		let item = {"item": "my-item"}
-		this.http.post('https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up.json', item).subscribe(response => {
-      console.log("response", response)
-    })
+	addToBasket(data) {
+		this.http
+			.post('https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up.json', data)
+			.subscribe((response) => {
+				console.log('response', response);
+			});
+	}
+
+	getBasket() {
+		return this.http.get('https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up.json');
 	}
 }
