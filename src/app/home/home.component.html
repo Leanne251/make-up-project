@@ -1,24 +1,30 @@
-<app-header></app-header>
-<div class="space-for-pics">Space For Pics</div>
-<main class="main-container">
-  <div class="search-form-container">
-    <app-search-all-products
-      (allSearchResults)="collectData($event)"
-      (productFilters)="showFilters($event)"
-    ></app-search-all-products>
-    <app-new-search-form
-      (clearItems)="clearItems()"
-      [filter]="filter"
-    ></app-new-search-form>
+<div class="page-container">
+  <app-header></app-header>
+  <div class="space-for-pics">
+    <img src="/assets/images/make-up-one.jpg" />
+    <img src="/assets/images/make-up-two.jpg" />
+    <img src="/assets/images/make-up-three.jpg" />
   </div>
-  <!-- If items exists, loop over them and display the results -->
+  <main class="main-container">
+    <div class="search-form-container">
+      <app-search-all-products
+        (allSearchResults)="collectData($event)"
+        (productFilters)="showFilters($event)"
+      ></app-search-all-products>
+      <app-new-search-form
+        (clearItems)="clearItems()"
+        [filter]="filter"
+      ></app-new-search-form>
+    </div>
+    <!-- If items exists, loop over them and display the results -->
 
-  <!-- <div *ngIf="items; else paramsItems" class="results-container"> -->
+    <!-- <div *ngIf="items; else paramsItems" class="results-container"> -->
 
-  <!-- </div> -->
+    <!-- </div> -->
 
-  <app-params-results></app-params-results>
-</main>
+    <app-results></app-results>
+  </main>
+</div>
 
 <!--
 <ng-template #showForm></ng-template> -->
