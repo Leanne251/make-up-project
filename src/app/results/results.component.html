@@ -17,8 +17,12 @@
 <div class="product-container">
   <div *ngFor="let riv of resultsInView">
     <div class="item-container" *ngIf="riv">
-      <p>{{ riv.name | titlecase }}</p>
-      <p>{{ riv.brand | titlecase }}</p>
+      <p class="item-title">
+        {{ riv.name | titlecase }}
+      </p>
+      <p>
+        <i>By {{ riv.brand | titlecase }}</i>
+      </p>
       <img
         [src]="riv.api_featured_image"
         alt="{{ riv.name }}"
@@ -27,7 +31,7 @@
       />
       <p>item.description, needs truncating</p>
       <p>£{{ riv.price }}0</p>
-      <button>Add to Basket</button>
+      <button class="add-to-basket">Add to Basket</button>
     </div>
   </div>
 </div>
