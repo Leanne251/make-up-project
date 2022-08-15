@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchAllProducts } from './search-all-products/search-all-products.component';
 import { HomeComponent } from './home/home.component';
+
 import { BasketComponent } from './basket/basket.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -26,8 +27,7 @@ import { ResultsComponent } from './results/results.component';
 		BasketComponent,
 		ProfileComponent,
 		NewSearchFormComponent,
-    ResultsComponent
-
+		ResultsComponent
 	],
 	imports: [
 		BrowserModule,
