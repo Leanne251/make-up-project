@@ -23,6 +23,7 @@ export class ResultsComponent implements OnInit {
 
 
 
+
   pages = []
   itemsPerPage= 25;
   resultsInView = []
