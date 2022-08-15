@@ -69,6 +69,10 @@ onChangeItemsDisplayed(event){
 
 }
 
+addToBasket(){
+  this.httpService.addToBasket()
+}
+
 }
 
 // select how many items you want on the page.

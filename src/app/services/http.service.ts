@@ -74,7 +74,10 @@ export class HttpService {
 	}
 
 	addToBasket() {
-		let item = 'my new item';
-		this.http.post('https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up.json', item);
+    console.log(1)
+		let item = {"item": "my-item"}
+		this.http.post('https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up.json', item).subscribe(response => {
+      console.log("response", response)
+    })
 	}
 }
