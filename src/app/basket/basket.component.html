@@ -1,10 +1,35 @@
 <app-header></app-header>
+<div class="horizontal-bar"></div>
+<div class="basket-container">
+  <p class="title-img">Image</p>
+  <p>Description</p>
+  <p>Amount</p>
+  <p>Price</p>
+  <p>Add</p>
+  <p>Remove</p>
+  <p>Delete</p>
+</div>
 <div *ngFor="let data of basketData" class="basket-container">
-    <img [src]="data.api_featured_image" height="100" width="100" class="border">
-    <div class="item-titles">
-        <p class="border">{{data.name}}</p>
-        <p class="border">{{data.brand}}</p>
-    </div>
-    
-    <p class="border">{{data.price}}</p>
+  <img
+    [src]="data.api_featured_image"
+    height="100"
+    width="100"
+    class="basket-image"
+  />
+  <div class="item-titles">
+    <p class="border">{{ data.name }}</p>
+    <p class="border">{{ data.brand }}</p>
+  </div>
+
+  <p>{{ data.amount }}</p>
+
+  <p class="border">£{{ data.price }}</p>
+  <button (click)="changeItemAmount(data.firebase_id, data.amount, 'add')">
+    +
+  </button>
+  <button (click)="changeItemAmount(data.firebase_id, data.amount, 'minus')">
+    -
+  </button>
+  <button (click)="deleteAll(data.firebase_id)">Delete All</button>
+  <hr />
 </div>

@@ -31,7 +31,11 @@
       />
       <p>item.description, needs truncating</p>
       <p>£{{ riv.price }}0</p>
-      <button class="add-to-basket" (click)="addToBasket(riv)">
+      <button
+        [disabled]="buttonDisabled"
+        class="add-to-basket"
+        (click)="addToBasket($event, riv)"
+      >
         Add to Basket
       </button>
     </div>

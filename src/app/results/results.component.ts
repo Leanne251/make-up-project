@@ -1,3 +1,4 @@
+import { isNgTemplate } from '@angular/compiler';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
 
@@ -21,6 +22,7 @@ export class ResultsComponent implements OnInit {
 	pages = [];
 	itemsPerPage = 25;
 	resultsInView = [];
+  buttonDisabled = false;
 
 	ngOnInit(): void {
 		this.httpService.results$.subscribe(() => {
@@ -53,11 +55,36 @@ export class ResultsComponent implements OnInit {
 		this.getPageResults(1);
 	}
 
-	addToBasket(item) {
-		console.log('item', item);
-		this.httpService.addToBasket(item);
+	addToBasket(e, item) {
+    e.target.disabled = true;
+
+
+    setTimeout(()=>{
+      e.target.disabled = false;
+    },500)
+
+
+    let itemToSend= {
+      id: item.id,
+      name: item.name,
+      brand: item.brand,
+      api_featured_image: item.api_featured_image,
+      price: item.price,
+      amount: 1
+
+    }
+
+		console.log('itemToSend', itemToSend);
+		this.httpService.addToBasket(itemToSend);
 	}
 }
 
 //what to add
 // {id, name, brand, image, desc, price }
+
+// can i check on "add to basket" if the 'id' is already in the basket.
+// Then have a pop up to say - are you sure you want to add item again.
+// if click yes, increase amount by 1?
+
+//send object to basket {
+

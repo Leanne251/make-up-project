@@ -26,3 +26,14 @@ button {
 	background: none;
 	border: none;
 }
+
+.space-for-pics {
+	height: 250px;
+	width: 100%;
+  display:flex;
+  gap: 5px;
+  justify-content: space-around;
+  background-color: var(--item-background-color);
+  padding: 10px 0px;
+
+}

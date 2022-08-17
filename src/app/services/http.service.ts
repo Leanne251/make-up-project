@@ -85,4 +85,17 @@ export class HttpService {
 	getBasket() {
 		return this.http.get('https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up.json');
 	}
+
+  deleteItem(firebase_id:string){
+    console.log("fire", firebase_id)
+    return this.http.delete(`https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up/${firebase_id}.json`)
+
+  }
+
+ changeAmount(firebase_id:string, amount:number){
+    let data = JSON.stringify({amount: amount});
+    return this.http.patch(`https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up/${firebase_id}.json`, data)
+  }
+
+
 }
