@@ -43,9 +43,11 @@ export class BasketComponent implements OnInit {
       amount--;
     }
 
-    this.httpService.changeAmount(firebase_id, amount).subscribe(() => {
-      this.getBasket();
-    });
+    this.httpService
+      .changeAmountViaFireBaseID(firebase_id, amount)
+      .subscribe(() => {
+        this.getBasket();
+      });
   }
 
   deleteAll(firebase_id: string) {
