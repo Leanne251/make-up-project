@@ -1,28 +1,48 @@
 .grid-container {
 	display: grid;
-  width: 80vw;
-  grid-template-columns: 20% 40% 10% 10% 5% 5% 10%;
-  grid-template-areas: "image titles amount price increase decrease";
-  border: 1px solid grey;
+	width: 80vw;
+	grid-template-columns: 20% 40% 10% 10% 5% 5% 10%;
+	grid-template-areas: "image titles amount price increase decrease";
+	border: 1px solid grey;
 
-  justify-items: center;
-  align-items:center;
-  margin: auto;
-  padding: 10px;
-  box-sizing: content-box;
+	justify-items: center;
+	align-items: center;
+	margin: auto;
+	padding: 10px;
+	box-sizing: content-box;
 }
 
-.basket-image{
-  grid-area: image;
-
+.quant-btn {
+	border-radius: 50%;
+	background-color: var(--header-color);
+	border: 3px solid var(--header-color);
+	color: #fff;
 }
 
-.title-img{
-  grid-area: image;
+.quant-btn:active,
+.del-btn:active {
+	transform: translateY(4px);
+}
+
+.del-btn {
+	height: 60px;
+	width: 60px;
+	border-radius: 5px;
+	border: none;
+	background-color: var(--border-color);
+	color: #fff;
+}
+
+.basket-image {
+	grid-area: image;
+}
+
+.title-img {
+	grid-area: image;
 }
 
 .item-titles {
-  grid-area: titles;
+	grid-area: titles;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -30,13 +50,20 @@
 	height: 100%;
 }
 
-.horizontal-bar{
-  height:5px;
-  width: 100%;
-  background-color: var(--header-color);
-  margin-bottom: 10px;
+.horizontal-bar {
+	height: 5px;
+	width: 100%;
+	background-color: var(--header-color);
+	margin-bottom: 10px;
 }
 
+.no-items {
+	text-align: center;
+}
+
+.total-text {
+	justify-self: flex-end;
+}
 /* Maybe grid for the basket?? */
 
 /* need to check items don't get added more than once
