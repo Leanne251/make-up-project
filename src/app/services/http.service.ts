@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { map, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  get immutableBasket() {
-    return this.inBasket;
-  }
-
   get immutableResults() {
     return this.results;
   }
@@ -22,12 +18,10 @@ export class HttpService {
 
   private results: any;
   private length: any;
-  private inBasket: any;
 
   params: any;
 
   results$ = new Subject();
-  basket$ = new Subject();
 
   getAllProducts() {
     this.http
@@ -87,9 +81,6 @@ export class HttpService {
       'https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up.json',
       data
     );
-    // .subscribe((response) => {
-    //   console.log('response', response);
-    // });
   }
 
   getBasket() {
@@ -99,7 +90,6 @@ export class HttpService {
   }
 
   deleteItem(firebase_id: string) {
-    console.log('fire', firebase_id);
     return this.http.delete(
       `https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up/${firebase_id}.json`
     );
@@ -111,10 +101,5 @@ export class HttpService {
       `https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up/${firebase_id}.json`,
       data
     );
-  }
-
-  changeAmountViaID(itemToSend) {
-    console.log('item to send in service', itemToSend);
-    // return this.http.patch(`https://make-up-f1a3e-default-rtdb.europe-west1.firebasedatabase.app/make-up/${firebase_id}.json`, data)
   }
 }

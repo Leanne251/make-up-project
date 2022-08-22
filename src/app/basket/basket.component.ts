@@ -8,6 +8,10 @@ import { HttpService } from '../services/http.service';
   styleUrls: ['./basket.component.css'],
 })
 export class BasketComponent implements OnInit {
+  // get basketData() {
+  //   return this.httpService.immutableBasket;
+  // }
+
   basketData: any;
   amount: number;
 

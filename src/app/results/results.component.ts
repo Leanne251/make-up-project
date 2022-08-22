@@ -20,9 +20,9 @@ export class ResultsComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {}
 
-  get basket() {
-    return this.httpService.immutableBasket;
-  }
+  // get basket() {
+  //   return this.httpService.immutableBasket;
+  // }
 
   get results() {
     return this.httpService.immutableResults;
@@ -32,11 +32,39 @@ export class ResultsComponent implements OnInit {
     return this.httpService.immutableLength;
   }
 
+  fakeData = [
+    {
+      id: 1,
+      name: 'black mascara',
+      brand: 'Rimmel',
+      api_featured_image: '',
+      price: '14.00',
+      amount: 1 || 1,
+    },
+    {
+      id: 2,
+      name: 'lipstick',
+      brand: 'Rimmel',
+      api_featured_image: '',
+      price: '14.00',
+      amount: 1 || 1,
+    },
+    {
+      id: 3,
+      name: 'brozner',
+      brand: 'Rimmel',
+      api_featured_image: '',
+      price: '14.00',
+      amount: 1 || 1,
+    },
+  ];
+
   pages = [];
   itemsPerPage = 25;
   resultsInView = [];
   buttonDisabled = false;
-  itemsInBasket: any;
+  itemsInBasket = [];
+  itemToSend: any;
 
   ngOnInit(): void {
     this.httpService.results$.subscribe(() => {
@@ -46,11 +74,7 @@ export class ResultsComponent implements OnInit {
       this.getPageResults(1);
     });
 
-    //gets the basket on page load
-
-    this.httpService.getBasket().subscribe((data) => {
-      this.itemsInBasket = data;
-    });
+    this.getBasket();
   }
 
   getPages() {
@@ -73,14 +97,38 @@ export class ResultsComponent implements OnInit {
     this.getPageResults(1);
   }
 
-  addToBasket(e, item) {
+  getBasket() {
+    this.httpService
+      .getBasket()
+      .pipe(
+        map((responseData) => {
+          const itemData = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              itemData.push({ ...responseData[key], firebase_id: key });
+            }
+          }
+          return itemData;
+        })
+      )
+      .subscribe((data) => {
+        this.itemsInBasket = data;
+      });
+  }
+
+  disableButton(e) {
     e.target.disabled = true;
 
     setTimeout(() => {
       e.target.disabled = false;
     }, 500);
+  }
 
-    let itemToSend = {
+  addToBasket(e: Event, item) {
+    this.disableButton(e);
+
+    this.itemToSend = {
+      firebase_id: item.firebase_id,
       id: item.id,
       name: item.name,
       brand: item.brand,
@@ -89,96 +137,39 @@ export class ResultsComponent implements OnInit {
       amount: item.amount || 1,
     };
 
-    //if I do a put request, will it make a new
+    if (this.itemsInBasket.length === 0) {
+      this.addItemToBasket();
+    } else {
+      this.checkForItem(item);
+    }
+  }
 
-    // need to always be listening for basketUpdate, and set variable to equal whats in the basket.
+  addItemToBasket() {
+    this.httpService.addNewItemToBasket(this.itemToSend).subscribe(() => {
+      this.getBasket();
+    });
+  }
 
-    this.httpService.getBasket().subscribe((data) => {
-      this.itemsInBasket = data;
+  checkForItem(item) {
+    let found = this.itemsInBasket.find((el) => {
+      if (el.id === item.id) {
+        return el;
+      }
     });
 
-    if (this.itemsInBasket) {
-      if (this.itemsInBasket === undefined) {
-        console.log(1);
-        this.httpService.addNewItemToBasket(itemToSend);
-      } else {
-        console.log(2);
-        this.itemsInBasket.find((el) => {
-          if (el.id === item.id) {
-            if (confirm('Are you sure you want to add this item again')) {
-              console.log('send patch request');
-            } else {
-              console.log('cancel');
-            }
-          } else {
-            console.log('add new item');
-            this.httpService.addNewItemToBasket(itemToSend);
-          }
-        });
+    if (found) {
+      if (confirm('Are you sure you want to add this item again')) {
+        found.amount++;
+        this.httpService
+          .changeAmountViaFireBaseID(found.firebase_id, found.amount)
+          .subscribe(() => {
+            this.getBasket();
+          });
       }
+    } else {
+      this.httpService.addNewItemToBasket(this.itemToSend).subscribe(() => {
+        this.getBasket();
+      });
     }
-
-    // const itemData = [];
-
-    // this.httpService
-    //   .getBasket()
-    //   .pipe(
-    //     map((responseData) => {
-    //       for (const key in responseData) {
-    //         if (responseData.hasOwnProperty(key)) {
-    //           itemData.push({ ...responseData[key], firebase_id: key });
-    //         }
-    //       }
-    //       return itemData;
-    //     })
-    //   )
-    //   .subscribe((data) => {
-    //     console.log('data', data);
-    //   });
-
-    // if (itemData === []) {
-
-    // }
-
-    //     data.find((el) => {
-    //       if (el.id === item.id) {
-    //         let duplicate = confirm(
-    //           'This item is already in your basket. Would you like to add another one?'
-    //         );
-    //         if (duplicate === true) {
-    //           itemToSend.amount++;
-    //           this.httpService.changeAmountViaID(itemToSend);
-    //         } else {
-    //           return;
-    //         }
-    //       } else {
-    //         console.log('itemToSend', itemToSend);
-    //         this.httpService.addToBasket(itemToSend);
-
-    // function setAlert() {
-    //   alert('Item Added');
-    // }
-
-    // setTimeout(setAlert, 1000);
-    //         }
-    //       });
-    //     });
   }
 }
-
-//what to add
-// {id, name, brand, image, desc, price }
-
-// Add to basket.
-// check if the basket is empty >>> add item to basket with a put request or post request.
-// if basket isn't empty, check to see if selected item ID matches an id of that in the basket.
-// if match - ask if want to add another item, send a patch request with that id and increase amount + 1
-
-// add to basket... , check contents of basket first.
-//
-
-//GETTERS!
-//set a variable for items in basket (immutable)
-// listen to a subject for when this value changes and update a variable in this comp.
-
-//get items in basket

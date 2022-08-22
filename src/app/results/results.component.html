@@ -1,3 +1,31 @@
+<!-- <p>Fake Shopping Data</p>
+<div *ngFor="let fake of fakeData">
+  <div class="item-container">
+    <p class="item-title">
+      {{ fake.name | titlecase }}
+    </p>
+    <p>
+      <i>By {{ fake.brand | titlecase }}</i>
+    </p>
+    <img
+      [src]="fake.api_featured_image"
+      alt="{{ fake.name }}"
+      [height]="100"
+      [width]="100"
+    />
+    <p>item.description, needs truncating</p>
+    <p>£{{ fake.price }}0</p>
+    <button
+      [disabled]="buttonDisabled"
+      class="add-to-basket"
+      (click)="addToBasket($event, fake)"
+    >
+      Add to Basket
+    </button> -->
+
+<!-- </div>
+</div> -->
+
 <div *ngIf="results" class="page-num-container">
   <div *ngFor="let page of pages">
     <!-- <div class="button-container"> -->
