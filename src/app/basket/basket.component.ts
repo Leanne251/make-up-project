@@ -19,6 +19,8 @@ export class BasketComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBasket();
+
+    this.getTotalAmounts();
   }
 
   getBasket() {
@@ -37,6 +39,7 @@ export class BasketComponent implements OnInit {
       )
       .subscribe((data) => {
         this.basketData = data;
+        console.log('basket', this.basketData);
       });
   }
 
@@ -60,4 +63,24 @@ export class BasketComponent implements OnInit {
       this.getBasket();
     });
   }
+
+  getTotalAmounts() {
+    if (this.basketData) {
+      console.log(1);
+      let amountValues = [];
+      this.basketData.forEach((el) => {
+        console.log(el.amount);
+        amountValues.push(el.amount);
+      });
+
+      console.log(amountValues, 'amount V');
+      amountValues.reduce((p, c) => p + c, 0);
+      console.log(amountValues, 'amount V');
+    }
+  }
 }
+
+// loop over the basket data and get all the values of the amount key
+// use forEach and push the value into an array.
+// create an array of these
+// then use the reducer method to add them up.

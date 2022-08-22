@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="horizontal-bar"></div>
-<div class="basket-container">
+<div class="grid-container">
   <p class="title-img">Image</p>
   <p>Description</p>
   <p>Amount</p>
@@ -9,7 +9,7 @@
   <p>Remove</p>
   <p>Delete</p>
 </div>
-<div *ngFor="let data of basketData" class="basket-container">
+<div *ngFor="let data of basketData" class="grid-container">
   <img
     [src]="data.api_featured_image"
     height="100"

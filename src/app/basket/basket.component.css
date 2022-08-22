@@ -1,4 +1,4 @@
-.basket-container {
+.grid-container {
 	display: grid;
   width: 80vw;
   grid-template-columns: 20% 40% 10% 10% 5% 5% 10%;
