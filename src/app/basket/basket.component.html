@@ -9,41 +9,53 @@
   <p>Remove</p>
   <p>Delete</p>
 </div>
-<div *ngFor="let data of basketData" >
+<div *ngFor="let data of basketData">
   <div *ngIf="data.amount > 0" class="grid-container">
-  <img
-    [src]="data.api_featured_image"
-    height="100"
-    width="100"
-    class="basket-image"
-  />
-  <div class="item-titles">
-    <p class="border">{{ data.name }}</p>
-    <p class="border">{{ data.brand }}</p>
+    <img
+      [src]="data.api_featured_image"
+      height="100"
+      width="100"
+      class="basket-image"
+    />
+    <div class="item-titles">
+      <p class="border">{{ data.name }}</p>
+      <p class="border">{{ data.brand }}</p>
+    </div>
+
+    <p>{{ data.amount }}</p>
+
+    <p class="border">
+      {{ data.price | number | currency: "GBP":"symbol":"1.2-2" }}
+    </p>
+    <button
+      class="quant-btn"
+      (click)="changeItemAmount(data.firebase_id, data.amount, 'add')"
+    >
+      <span>&#43;</span>
+    </button>
+    <button
+      class="quant-btn"
+      (click)="changeItemAmount(data.firebase_id, data.amount, 'minus')"
+    >
+      <span>&#8722;</span>
+    </button>
+    <button class="del-btn" (click)="deleteAll(data.firebase_id)">
+      Delete All
+    </button>
+    <hr />
   </div>
-
-  <p>{{ data.amount }}</p>
-
-  <p class="border">£{{ data.price }}</p>
-  <button class="quant-btn" (click)="changeItemAmount(data.firebase_id, data.amount, 'add')">
-    <span>&#43;</span>
-  </button>
-  <button class="quant-btn" (click)="changeItemAmount(data.firebase_id, data.amount, 'minus')">
-    <span>&#8722;</span>
-  </button>
-  <button class="del-btn" (click)="deleteAll(data.firebase_id)">Delete All</button>
-  <hr />
 </div>
-</div>
-<div class="grid-container" *ngIf="totalItemAmount > 0; else noItems ">
+<div class="grid-container" *ngIf="totalItemAmount > 0; else noItems">
   <div></div>
   <div class="total-text">Total:</div>
   <div>{{ totalItemAmount }}</div>
-  <div>{{ totalItemCost | number | currency :'GBP':'symbol':'1.2-2'}}</div>
+  <div>{{ totalItemCost | number | currency: "GBP":"symbol":"1.2-2" }}</div>
   <div></div>
   <div></div>
   <button class="del-btn" (click)="emptyBasket()">Empty Basket</button>
 </div>
-<ng-template #noItems >
-  <h2 class="no-items">Your Basket is empty. Click <a routerLink="/home">here </a>to go shopping! </h2>
+<ng-template #noItems>
+  <h2 class="no-items">
+    Your Basket is empty. Click <a routerLink="/home">here </a>to go shopping!
+  </h2>
 </ng-template>
